@@ -1,0 +1,30 @@
+{
+    "universitites":[
+        {
+            "id":1,
+            "title":"Higher school of economics",
+            "about":"Описание",
+            "price": 290000,
+            "places":25,
+            "studyprogramCounter": 20,
+            "image": "srcURL"
+            
+        }
+    ],
+    "studyprograms":[
+        {
+            "id":1,
+            "title":"architector",
+            "about":"about",
+            "image":"imgSrc",
+            "priceEducation":200000,
+            "profession_key": "professionNAME",
+            "university_key":"UniversityID",
+        }
+    ],
+    "professions":[
+        {
+
+        }
+    ]
+}
