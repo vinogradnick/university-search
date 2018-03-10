@@ -1,10 +1,13 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import universitites from './modules/universities'
 import createLogger from 'vuex/dist/logger'
+Vue.use(Vuex)
 
-const store = new Vuex.Store({
-    // ...
-    plugins: [createLogger()],
-    strict:process.env.NODE_ENV !== 'production'
+export default new Vuex.Store({
+  modules: {
+    universitites
+  },
+  plugins: [createLogger()],
+  strict: process.env.NODE_ENV !== 'production'
 })
-export default store;

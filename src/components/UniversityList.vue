@@ -1,6 +1,7 @@
 <template>
  <v-flex xs12>
         <v-card>
+          <v-btn v-on:click="searching" color="success">Success</v-btn>
 
     <v-card-title>
         Список университетов
@@ -16,7 +17,7 @@
 
     <v-data-table
       :headers="headers"
-      :items="items"
+      :items=universities
       :search="search"
 >
       <template slot="items" slot-scope="props" >
@@ -29,49 +30,49 @@
         </router-link>
       </template>
       <v-alert slot="no-results" :value="true" color="error" icon="warning">
-         По вашему запросу "{{ search }}" нет результатов 
+         По вашему запросу "{{ search }}" нет результатов
       </v-alert>
     </v-data-table>
   </v-card>
       </v-flex>
-     
+
 </template>
 <script>
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
-  name:'UniversityList',
-   data () {
-      return {
-        search: ' ',
-        headers: [
-          {
-            text: 'Название университета',
-            align: 'left',
-            sortable: true,
-            value: 'name'
-          },
+  name: 'UniversityList',
+  data () {
+    return {
+      search: ' ',
+      headers: [
+        {
+          text: 'Название университета',
+          align: 'left',
+          sortable: true,
+          value: 'name'
+        },
 
-          { text: 'Проходной бал', value: 'egeval' },
-           { text: 'Количество мест', value: 'places' },
-          { text: 'Стоимость обучения', value: 'price' },
-          { text: 'Ссылка на сайт', value: 'link' },
-        ],
-        items: [
-          {
-              name :'Higher school of Economics',
-              egeval:'290',
-              price:'100 000',
-              places:25,
-              link: "link"
-          },
-           {
-              name :'Московский государственный университет',
-              egeval:'290',
-              price:'240 000',
-              places:215
-          }
-        ]
-      }
+        { text: 'Проходной бал', value: 'egeval' },
+        { text: 'Количество мест', value: 'places' },
+        { text: 'Стоимость обучения', value: 'price' },
+        { text: 'Ссылка на сайт', value: 'link' }
+      ],
+      items: [
+
+      ]
     }
-  }
+  },
+  methods: mapActions({
+    //todo make router to university detail view
+    //todo make 
+    searching: 'searching'
+
+  }),
+  computed: mapGetters({
+    // Todo make comparion with two - three universities on page
+    // todo make
+    universities: 'all_univers'
+  })
+}
 </script>

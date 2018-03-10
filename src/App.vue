@@ -1,5 +1,5 @@
 <template>
-   <v-app id="inspire">
+  <v-app id="inspire">
     <v-navigation-drawer
       fixed
       :clipped="$vuetify.breakpoint.mdAndUp"
@@ -16,7 +16,7 @@
           >
             <v-flex xs6>
               <v-subheader v-if="item.heading">
-                         {{ item.heading }}
+                {{ item.heading }}
               </v-subheader>
             </v-flex>
             <v-flex xs6 class="text-xs-center">
@@ -57,9 +57,9 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>
-                   <router-link  tag="p" :to='{path:item.route}'>
-                {{ item.text }}
-                   </router-link>
+                <router-link  tag="p" :to='{path:item.route}'>
+                  {{ item.text }}
+                </router-link>
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -78,15 +78,15 @@
         <span class="hidden-sm-and-down">Поиск университета </span>
       </v-toolbar-title>
       <v-select
-          :items="states"
-          v-model="a1"
-          label="Найти университет"
-          autocomplete
-          flat
+        :items="states"
+        v-model="a1"
+        label="Найти университет"
+        autocomplete
+        flat
         solo-inverted
         prepend-icon="search"
         class="hidden-sm-and-down"
-        ></v-select>
+      ></v-select>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>apps</v-icon>
@@ -117,123 +117,118 @@
     >
       <v-icon>search</v-icon>
     </v-btn>
-     <v-dialog
-        v-model="dialog"
-        fullscreen
-        transition="dialog-bottom-transition"
-        :overlay="false"
-        scrollable
-      >
-        <v-card tile>
-          <v-toolbar card dark color="primary">
-            <v-btn icon @click.native="dialog = false" dark>
-              <v-icon>close</v-icon>
+    <v-dialog
+      v-model="dialog"
+      fullscreen
+      transition="dialog-bottom-transition"
+      :overlay="false"
+      scrollable
+    >
+      <v-card tile>
+        <v-toolbar card dark color="primary">
+          <v-btn icon @click.native="dialog = false" dark>
+            <v-icon>close</v-icon>
+          </v-btn>
+          <v-toolbar-title>Баллы</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn dark flat @click.native="save">Сохранить данные</v-btn>
+          </v-toolbar-items>
+          <v-menu bottom right offset-y>
+            <v-btn slot="activator" dark icon>
+              <v-icon>more_vert</v-icon>
             </v-btn>
-            <v-toolbar-title>Баллы</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-toolbar-items>
-              <v-btn dark flat @click.native="dialog = false">Сохранить данные</v-btn>
-            </v-toolbar-items>
-            <v-menu bottom right offset-y>
-              <v-btn slot="activator" dark icon>
-                <v-icon>more_vert</v-icon>
-              </v-btn>
-              <v-list>
-                <v-list-tile v-for="(item, i) in items" :key="i" @click="">
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
-          </v-toolbar>
-          <v-card-text>
+            <v-list>
+              <v-list-tile v-for="(item, i) in items" :key="i" @click="">
+                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </v-toolbar>
+        <v-card-text>
 
-            <v-list three-line subheader>
-                <v-form v-model="valid" ref="form" lazy-validation>
+          <v-list three-line subheader>
+            <v-form v-model="valid" ref="form" lazy-validation>
               <v-subheader>Основные предметы</v-subheader>
               <v-container grid-list-md >
- <v-layout row wrap>
-                <v-flex xs6>
-       <v-text-field
-      label="Математика"
-      v-model="name"
-      :rules="nameRules"
-      :counter="10"
-      required
-    ></v-text-field>
-      </v-flex>
-      <v-flex xs6>
-       <v-text-field
-      label="Русский язык"
-      v-model="name"
-      :rules="nameRules"
-      :counter="10"
-      required
-    ></v-text-field>
-      </v-flex>
-              </v-layout>
+                <v-layout row wrap>
+                  <v-flex xs6>
+                    <v-text-field
+                      v-bind:label=mathematics.name
+                      v-model=mathematics.value
+                      max="100"
+                      min="0"
+                      required
+                      type="number"
+                    />
+                  </v-flex>
+                  <v-flex xs6>
+                    <v-text-field
+                      v-bind:label=russian.name
+                      v-model=russian.value
+                      max="100"
+                      min="0"
+                      required
+                      type="number"
+                    />
+                  </v-flex>
+                </v-layout>
               </v-container>
-             
-              
-                </v-form>
-            </v-list>
-            
-            <v-divider></v-divider>
-            <v-list three-line subheader>
-              <v-subheader>Профильные предметы</v-subheader>
+
+            </v-form>
+          </v-list>
+
+          <v-divider></v-divider>
+          <v-list three-line subheader>
+            <v-subheader>Профильные предметы</v-subheader>
+            <div v-for="subject in subjects" v-bind:key=subject.name>
               <v-list-tile avatar>
-                <v-checkbox v-model="enabled" hide-details class="shrink mr-2"></v-checkbox>
-        <v-text-field label="Биология" :disabled="!enabled"></v-text-field>
+                <v-checkbox v-model="subject.selected" hide-details class="shrink mr-2"></v-checkbox>
+                <v-text-field v-bind:label=subject.name v-model=subject.value  :disabled="!subject.selected"  type="number" max="100" min="0"/>
               </v-list-tile>
-              <v-list-tile avatar>
-                <v-checkbox v-model="enabled" hide-details class="shrink mr-2"></v-checkbox>
-        <v-text-field label="История" :disabled="!enabled"></v-text-field>
-              </v-list-tile>
-              
-            </v-list>
-          </v-card-text>
-          <div style="flex: 1 1 auto;"/>
-        </v-card>
-      </v-dialog>
-    
+            </div>
+          </v-list>
+        </v-card-text>
+        <div style="flex: 1 1 auto;"/>
+      </v-card>
+    </v-dialog>
+
   </v-app>
 </template>
 
 <script>
+import {mapGetters, mapActions} from 'vuex'
 export default {
   name: 'App',
-    data: () => ({
+  computed: mapGetters({
+    subjects: 'get_subjects',
+    mathematics: 'get_mathematics',
+    russian: 'get_russian',
+    states: 'get_states'
+  }),
+  methods: mapActions({
+    // TODO save data_form => university_USER STATE
+    // TOdo make filtration universtiy by ege values,
+    // Todo make reset order university list
+
+
+  }),
+  data: () => {
+    return ({
       dialog: false,
       drawer: null,
       enabled: false,
       a1: null,
-        states: [
-          'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-          'Arkansas', 'California', 'Colorado', 'Connecticut',
-          'Delaware', 'District of Columbia', 'Federated States of Micronesia',
-          'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
-          'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-          'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
-          'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-          'Missouri', 'Montana', 'Nebraska', 'Nevada',
-          'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-          'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-          'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-          'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-          'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-          'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-        ],
+
       items: [
-        { icon: 'home', text: 'Главная', route: '/'},
-        { icon: 'school', text: 'Университеты', route: '/unviversitylist'},
-        { icon: 'content_cut', text: 'Професси' , route:'/professionlist'},
-        { icon: 'local_offer', text: 'Программы обучения', route:'/studyprogramlist' },
+        {icon: 'home', text: 'Главная', route: '/'},
+        {icon: 'school', text: 'Университеты', route: '/unviversitylist'},
+        {icon: 'content_cut', text: 'Професси', route: '/professionlist'},
+        {icon: 'local_offer', text: 'Программы обучения', route: '/studyprogramlist'}
       ],
-       valid: true,
-      name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters'
-      ],
-       })
+      valid: true,
+      nameRules: []
+    })
+  }
 }
 </script>
