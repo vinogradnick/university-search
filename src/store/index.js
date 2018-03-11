@@ -1,6 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import universitites from './modules/universities'
+import universitites from './modules/universities/index'
 import createLogger from 'vuex/dist/logger'
 Vue.use(Vuex)
 

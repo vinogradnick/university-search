@@ -5,14 +5,14 @@
 
     <v-card-title>
         Список университетов
-      <v-spacer></v-spacer>
+      <v-spacer/>
       <v-text-field
         append-icon="search"
         label="Поиск университета"
         single-line
         hide-details
         v-model="search"
-      ></v-text-field>
+      />
     </v-card-title>
 
     <v-data-table
@@ -21,7 +21,7 @@
       :search="search"
 >
       <template slot="items" slot-scope="props" >
-        <router-link  tag="tr" to='university/1'>
+        <router-link  tag="tr" v-bind:to="'university/'+props.item.id">
         <td>{{ props.item.name }}</td>
         <td class="text-xs-right">{{ props.item.egeval }}</td>
         <td class="text-xs-right">{{ props.item.places }}</td>
@@ -64,8 +64,9 @@ export default {
     }
   },
   methods: mapActions({
-    //todo make router to university detail view
-    //todo make 
+    // todo make router to university detail view
+    // todo make sity order -> univesitylist
+    // todo make
     searching: 'searching'
 
   }),

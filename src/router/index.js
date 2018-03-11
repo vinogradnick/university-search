@@ -34,6 +34,6 @@ export default new Router({
       name: 'UniversityDetail',
       component: UniversityDetail,
     },
-   
+
   ]
 })
