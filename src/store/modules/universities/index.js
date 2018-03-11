@@ -1,84 +1,5 @@
 const state = {
-  subjects: [
-    {
-      name: 'biology',
-      value: 0,
-      required: false,
-      selected: false
 
-    },
-    {
-      name: 'geography',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'english',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'informatics',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'history',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'literature',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'mathematics',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'social',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'russian',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'physics',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'chemistry',
-      value: 0,
-      required: false,
-      selected: false
-
-    }
-
-  ],
   universitylist: [
     {
       id: 1,
@@ -183,7 +104,15 @@ const state = {
           name: 'education program name',
           about: 'about education programs',
           priceEducation: 10000,
-          edu_code: '0.0.0'
+          edu_code: '0.0.0',
+          subjects: [
+            {
+              name: 'mathematics',
+              value: 170,
+              selected: true
+
+            }
+          ]
 
         }
 
@@ -238,31 +167,18 @@ const actions = {
 }
 
 const getters = {
-  getNesesary: function (state) {
-    const subj = state.subjects
-    return state.universitylist.map()
-  },
-  get_subjects () {
-    return state.subjects
-  },
-  get_states () {
+
+  all_univers: (state) => {
     return state.universitylist
-  },
-  get_mathematics () {
-    return state.subjects[6]
-  },
-  all_univers () {
-    return state.universitylist
-  },
-  get_russian () {
-    return state.subjects[8]
   },
   currentUniversity (state) {
     return (id) => {
       return state.universitylist.find(univer => univer.id === id)
     }
   },
-
+  GET_STATES: (state) => {
+    return state.universitylist
+  }
 
 }
 

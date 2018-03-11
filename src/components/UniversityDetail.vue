@@ -3,7 +3,7 @@
     <v-container fill-height>
       <v-layout align-center>
         <v-flex xs12>
-          <h3 class="display-3" >
+          <h3 class="display-3 text-xs-center" >
             {{university.name}}
           </h3>
           <br>
@@ -25,31 +25,23 @@
           <v-divider class="my-3"/>
           <h3 class="text-xs-center display-1">Образовательные программы</h3>
           <v-list two-line>
-            <template v-for="(item, index) in items">
+            <template v-for="program in university.educationPrograms">
               <v-list-tile
                 avatar
                 ripple
-                @click="toggle(index)"
-                :key="item.title"
+                @click="toggle(program)"
+                :key="program.id"
               >
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                  <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
-                  <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
+                  <v-list-tile-title>{{ program.name }}</v-list-tile-title>
+                  <v-list-tile-sub-title class="text--primary">{{ program.about}}</v-list-tile-sub-title>
+                  <v-list-tile-sub-title>{{ program.priceEducation }}</v-list-tile-sub-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
-                  <v-list-tile-action-text>{{ item.action }}</v-list-tile-action-text>
-                  <v-icon
-                    color="grey lighten-1"
-                    v-if="selected.indexOf(index) < 0"
-                  >star_border</v-icon>
-                  <v-icon
-                    color="yellow darken-2"
-                    v-else
-                  >star</v-icon>
+                  <v-list-tile-action-text>Код программы: {{ program.edu_code }}</v-list-tile-action-text>
+
                 </v-list-tile-action>
               </v-list-tile>
-              <v-divider v-if="index + 1 < items.length" :key="index"/>
             </template>
           </v-list>
         </v-flex>
@@ -66,10 +58,10 @@ export default {
   name: 'UniversityDetail',
 
   computed: {
-    // ...mapGetters({
-    //   educationPrograms: 'getEducationProgram'
-    //
-    // }),
+    ...mapGetters({
+      educationPrograms: 'get_programs'
+
+    }),
     university: function () {
       // succses university_detail view for this unviersirty
       const routeParams = this.$route.params.id
@@ -80,7 +72,6 @@ export default {
   data: function () {
     return {
       tabs: null,
-      selected: [2],
       items: [
         {
           action: '15 min',

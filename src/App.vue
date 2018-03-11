@@ -74,7 +74,7 @@
       fixed
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
         <span class="hidden-sm-and-down">Поиск университета </span>
       </v-toolbar-title>
       <v-select
@@ -85,18 +85,15 @@
         flat
         solo-inverted
         prepend-icon="search"
+        item-text="name"
         class="hidden-sm-and-down"
-      ></v-select>
-      <v-spacer></v-spacer>
+      />
+      <v-spacer/>
       <v-btn icon>
         <v-icon>apps</v-icon>
       </v-btn>
       <v-btn icon>
         <v-icon>notifications</v-icon>
-      </v-btn>
-      <v-btn icon large>
-        <v-avatar size="32px" tile>
-        </v-avatar>
       </v-btn>
     </v-toolbar>
     <v-content>
@@ -130,9 +127,9 @@
             <v-icon>close</v-icon>
           </v-btn>
           <v-toolbar-title>Баллы</v-toolbar-title>
-          <v-spacer></v-spacer>
+          <v-spacer/>
           <v-toolbar-items>
-            <v-btn dark flat @click.native="save">Сохранить данные</v-btn>
+            <v-btn dark flat v-on:click="selected">Сохранить данные</v-btn>
           </v-toolbar-items>
           <v-menu bottom right offset-y>
             <v-btn slot="activator" dark icon>
@@ -155,7 +152,8 @@
                   <v-flex xs6>
                     <v-text-field
                       v-bind:label=mathematics.name
-                      v-model=mathematics.value
+                      v-model.number=mathematics.value
+                      :rules="rule_value"
                       max="100"
                       min="0"
                       required
@@ -165,7 +163,8 @@
                   <v-flex xs6>
                     <v-text-field
                       v-bind:label=russian.name
-                      v-model=russian.value
+                      v-model.number=russian.value
+                      :rules="rule_value"
                       max="100"
                       min="0"
                       required
@@ -178,18 +177,19 @@
             </v-form>
           </v-list>
 
-          <v-divider></v-divider>
+          <v-divider/>
           <v-list three-line subheader>
             <v-subheader>Профильные предметы</v-subheader>
             <div v-for="subject in subjects" v-bind:key=subject.name>
               <v-list-tile avatar>
-                <v-checkbox v-model="subject.selected" hide-details class="shrink mr-2"></v-checkbox>
-                <v-text-field v-bind:label=subject.name v-model=subject.value  :disabled="!subject.selected"  type="number" max="100" min="0"/>
+                <v-checkbox v-model="subject.selected" hide-details class="shrink mr-2"/>
+                <v-text-field v-bind:label=subject.name v-model.number=subject.value :disabled="!subject.selected"
+                              type="number" max="100" min="0" />
               </v-list-tile>
             </div>
           </v-list>
         </v-card-text>
-        <div style="flex: 1 1 auto;"/>
+        <div style="flex: 1 1 auto;"></div>
       </v-card>
     </v-dialog>
 
@@ -199,22 +199,17 @@
 <script>
 import {mapGetters, mapActions} from 'vuex'
 export default {
+
   name: 'App',
   computed: mapGetters({
     subjects: 'get_subjects',
     mathematics: 'get_mathematics',
     russian: 'get_russian',
-    states: 'get_states'
-  }),
-  methods: mapActions({
-    // TODO save data_form => university_USER STATE
-    // TOdo make filtration universtiy by ege values,
-    // Todo make reset order university list
-
-
+    states: 'GET_STATES',
+    univers: 'GET_UNIVERSTIY_BY_EGE_VALUE'
   }),
   data: () => {
-    return ({
+    return {
       dialog: false,
       drawer: null,
       enabled: false,
@@ -227,7 +222,21 @@ export default {
         {icon: 'local_offer', text: 'Программы обучения', route: '/studyprogramlist'}
       ],
       valid: true,
-      nameRules: []
+      rule_value: [
+        v => {
+          return Number(v) <= 100 || 'must be number'
+        }
+      ]
+    }
+  },
+  methods: {
+
+    ...mapActions({
+    // TODO save data_form => university_USER STATE
+    // TOdo make filtration universtiy by ege values,
+    // Todo make reset order university list
+      selected: 'selected_subj'
+
     })
   }
 }
