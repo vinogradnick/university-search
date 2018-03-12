@@ -1,7 +1,6 @@
 <template>
  <v-flex xs12>
-        <v-card>
-          <v-btn  color="success" v-on:click="load">Success</v-btn>
+        <v-card align-center>
 
     <v-card-title>
         Список университетов
@@ -70,7 +69,7 @@ export default {
     loadData: function () {
       this.$http.get('@/db.json').then((response) => {
         if (response.body) {
-          console.log(response.body);
+          console.log(response.body)
           this.locat = response.body
         }
       }, (response) => {

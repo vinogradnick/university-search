@@ -18,4 +18,4 @@ const firebaseDatabase = Firebase.initializeApp({
   storageBucket: 'university-77bec.appspot.com',
   messagingSenderId: '713552458128'
 })
-const Database = firebaseDatabase.database()
+export const Database = firebaseDatabase.database()

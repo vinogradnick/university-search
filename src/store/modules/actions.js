@@ -10,6 +10,10 @@ export const actions = {
   loadFirebase: ({state, commit}) => {
     console.log('firebas is loading')
     commit('loadDatabase')
+  },
+  professionlistOrder: ({state, commit}) => {
+    console.log('profession list order')
+    commit('orderProfession')
   }
 
 }

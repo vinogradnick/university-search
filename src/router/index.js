@@ -4,14 +4,14 @@ import UniversityList from '@/components/UniversityList'
 import ProfessionList from '@/components/ProfessionList'
 import StudyprogramList from '@/components/StudyprogramList'
 import UniversityDetail from '@/components/UniversityDetail'
-import Main from "@/components/Main"
+import Main from '@/components/Main'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path:'/',
-      name:'Main',
+      path: '/',
+      name: 'Main',
       component: Main
     },
     {
@@ -22,18 +22,18 @@ export default new Router({
     {
       path: '/professionlist',
       name: 'ProfessionList',
-      component: ProfessionList,
+      component: ProfessionList
     },
     {
       path: '/studyprogramlist',
       name: 'StudyprogramList',
-      component: StudyprogramList,
+      component: StudyprogramList
     },
     {
-      path:'/university/:id',
+      path: '/university/:id',
       name: 'UniversityDetail',
-      component: UniversityDetail,
-    },
+      component: UniversityDetail
+    }
 
   ]
 })

@@ -8,16 +8,16 @@
           </h3>
           <br>
           <span class="subheading">Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.</span>
-          <v-divider class="my-3"></v-divider>
-          <div class="title mb-3" >
-            <v-layout row wrap align-center>
-              <v-flex xs4>
+          <v-divider class="my-3"/>
+          <div class="title mb-3"  >
+            <v-layout row wrap >
+              <v-flex xs4 align-center>
                 <p class="headline">Стоимость обучения: 400 000 р</p>
               </v-flex>
-              <v-flex xs4>
+              <v-flex xs4 align-center>
                 <p class="headline">Образовательных программ: 150</p>
               </v-flex>
-              <v-flex xs4>
+              <v-flex xs4 align-center>
                 <p class="headline">Проходной бал: 290</p>
               </v-flex>
             </v-layout>
@@ -52,7 +52,7 @@
   </v-layout>
 
 </template>
-<script type="text/javascript">
+<script>
 import {mapGetters, mapActions} from 'vuex'
 export default {
   name: 'UniversityDetail',
@@ -106,6 +106,11 @@ export default {
       ]
 
     }
+  },
+  methods: {
+    ...mapActions({
+
+    })
   }
 }
 </script>

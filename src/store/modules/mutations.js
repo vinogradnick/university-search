@@ -3,7 +3,7 @@ import {Database} from '../../api/databaseWorker'
 export const mutations = {
   setData: (state, {type, data}) => {
     console.log(data)
-    return state[type] = data
+    state[type] = data
   },
   // Выбор предметов
   selectSubjects: function (state) {
@@ -28,11 +28,12 @@ export const mutations = {
   },
 
   // Выбор образовательных программ согласно баллам
-  selectEducationPrograms: function (state) {
+  /* selectEducationPrograms: function (state) {
 
   },
+  */
   // Сортировка программ обучения по городу
-  orderUniversitiesbyLocation: (state) => { return state.universitylist.filter(univer => univer.location === user_location) },
+  // todo orderUniversitiesbyLocation: (state) => { return state.universitylist.filter(univer => univer.location === user_location) },
   // Загрузка базы данных в состояние
   loadDatabase: (state) => {
     console.log(Database)
