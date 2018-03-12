@@ -237,7 +237,8 @@ export default {
     // Todo make reset order university list
       selected: 'selected_subj'
 
-    })
+    }),
+
   }
 }
 </script>

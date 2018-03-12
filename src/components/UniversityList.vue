@@ -1,7 +1,7 @@
 <template>
  <v-flex xs12>
         <v-card>
-          <v-btn v-on:click="searching" color="success">Success</v-btn>
+          <v-btn  color="success" v-on:click="load">Success</v-btn>
 
     <v-card-title>
         Список университетов
@@ -63,13 +63,29 @@ export default {
       ]
     }
   },
-  methods: mapActions({
-    // todo make router to university detail view
-    // todo make sity order -> univesitylist
-    // todo make
-    searching: 'searching'
+  methods: {
+    init: function () {
+      this.loadData()
+    },
+    loadData: function () {
+      this.$http.get('@/db.json').then((response) => {
+        if (response.body) {
+          console.log(response.body);
+          this.locat = response.body
+        }
+      }, (response) => {
+        this.error = response
+      })
+    },
+    ...mapActions({
+      // todo make router to university detail view
+      // todo make sity order -> univesitylist
+      // todo make
+      searching: 'searching',
+      load: 'loadFirebase'
 
-  }),
+    })
+  },
   computed: mapGetters({
     // Todo make comparion with two - three universities on page
     // todo make

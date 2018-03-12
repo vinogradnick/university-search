@@ -1,4 +1,4 @@
-const state = {
+export const state = {
 
   universitylist: [
     {
@@ -143,48 +143,85 @@ const state = {
     }
   ],
   professions: [],
-  // selected university list
-  selected_univers: []
+  selected_univers: [],
+  selected_subjects: [],
+  ege_value: 0,
+  subjects: [
+    {
+      name: 'Биология',
+      value: 0,
+      required: false,
+      selected: false
 
-}
+    },
+    {
+      name: 'География',
+      value: 0,
+      required: false,
+      selected: false
 
-const mutations = {
+    },
+    {
+      name: 'Иностранный язык',
+      value: 0,
+      required: false,
+      selected: false
 
-  setData: (state, {type, data}) => {
-    console.log(data)
-    return state[type] = data
-  }
+    },
+    {
+      name: 'Информатика',
+      value: 0,
+      required: false,
+      selected: false
 
-}
+    },
+    {
+      name: 'История',
+      value: 0,
+      required: false,
+      selected: false
 
-const actions = {
+    },
+    {
+      name: 'Литература',
+      value: 0,
+      required: false,
+      selected: false
 
-  searching () {
-    console.log('change')
-    commit('setData', {type: 'universitylist', data: null})
-  }
+    },
+    {
+      name: 'Математика',
+      value: 0,
+      required: false,
+      selected: true
 
-}
+    },
+    {
+      name: 'Обществознание',
+      value: 0,
+      required: false,
+      selected: false
 
-const getters = {
-
-  all_univers: (state) => {
-    return state.universitylist
-  },
-  currentUniversity (state) {
-    return (id) => {
-      return state.universitylist.find(univer => univer.id === id)
+    },
+    {
+      name: 'Русский язык',
+      value: 0,
+      required: false,
+      selected: true
+    },
+    {
+      name: 'Физика',
+      value: 0,
+      required: false,
+      selected: false
+    },
+    {
+      name: 'Химия',
+      value: 0,
+      required: false,
+      selected: false
     }
-  },
-  GET_STATES: (state) => {
-    return state.universitylist
-  }
+  ],
+  user_location: 'all'
 
-}
-
-export default{
-  state,
-  mutations,
-  getters,
-  actions
 }
