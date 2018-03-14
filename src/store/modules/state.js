@@ -8,7 +8,7 @@ export const state = {
       priceEducation: '100 000',
       average_priceEducation: '1000',
       placeEducation: 25,
-      average_ege: '75.5',
+      average_ege: 90,
       website_link: 'link',
 
       educationPrograms: [
@@ -25,12 +25,12 @@ export const state = {
     },
     {
       id: 2,
-      name: 'Higher school of Economics',
+      name: 'Московский гос универ',
       about: 'about university',
       priceEducation: '100 000',
       average_priceEducation: '1000',
       placeEducation: 25,
-      average_ege: '75.5',
+      average_ege: 50,
       website_link: 'link',
 
       educationPrograms: [
@@ -47,17 +47,17 @@ export const state = {
     },
     {
       id: 3,
-      name: 'Higher school of Economics',
+      name: 'Пермский государственный национальный исследовательский университет',
       about: 'about university',
       priceEducation: '100 000',
       average_priceEducation: '1000',
       placeEducation: 25,
-      average_ege: '75.5',
+      average_ege: 97,
       website_link: 'link',
 
       educationPrograms: [
         {
-          name: 'education program name',
+          name: '',
           about: 'about education programs',
           priceEducation: 10000,
           edu_code: '0.0.0'
@@ -69,17 +69,17 @@ export const state = {
     },
     {
       id: 4,
-      name: 'Higher school of Economics',
+      name: 'Пермский национальный исследовательский политехнический университет',
       about: 'about university',
       priceEducation: '100 000',
       average_priceEducation: '1000',
-      placeEducation: 25,
-      average_ege: '75.5',
+      placeEducation: 44,
+      average_ege: 99,
       website_link: 'link',
 
       educationPrograms: [
         {
-          name: 'education program name',
+          name: ' Пермская государственная академия искусства и культуры',
           about: 'about education programs',
           priceEducation: 10000,
           edu_code: '0.0.0'
@@ -91,12 +91,12 @@ export const state = {
     },
     {
       id: 5,
-      name: 'Higher school of Economics',
+      name: 'Пермская государственная академия искусства и культуры',
       about: 'about university',
       priceEducation: '100 000',
       average_priceEducation: '1000',
       placeEducation: 25,
-      average_ege: '75.5',
+      average_ege: 30,
       website_link: 'link',
 
       educationPrograms: [
@@ -121,12 +121,12 @@ export const state = {
     },
     {
       id: 6,
-      name: 'Higher school of Economics',
+      name: 'Национального исследовательского университета "Высшая школа экономики"',
       about: 'about university',
       priceEducation: '100 000',
       average_priceEducation: '1000',
       placeEducation: 25,
-      average_ege: '75.5',
+      average_ege: 20,
       website_link: 'link',
       location: '',
       subjects: [],

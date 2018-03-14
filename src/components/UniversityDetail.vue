@@ -21,9 +21,7 @@
                 row
                 wrap
                 :items="university.educationPrograms"
-                :rows-per-page-items="rowsPerPageItems"
-                :pagination.sync="pagination"
-              >
+                >
                 <v-flex
                   slot="item"
                   slot-scope="props"

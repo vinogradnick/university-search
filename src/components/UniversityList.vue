@@ -1,9 +1,9 @@
 <template>
  <v-flex xs12>
-        <v-card align-center>
+        <v-card align-center v-if="selectedUnivers !== null">
 
     <v-card-title>
-        Список университетов
+        Список найденых университетов
       <v-spacer/>
       <v-text-field
         append-icon="search"
@@ -13,12 +13,11 @@
         v-model="search"
       />
     </v-card-title>
-
-    <v-data-table
-      :headers="headers"
-      :items=universities
-      :search="search"
->
+      <v-data-table v-if="selectedUnivers !== null"
+                    :headers="headers"
+                    :items=selectedUnivers
+                    :search="search"
+      >
       <template slot="items" slot-scope="props" >
         <router-link  tag="tr" v-bind:to="'university/'+props.item.id">
         <td>{{ props.item.name }}</td>
@@ -33,6 +32,38 @@
       </v-alert>
     </v-data-table>
   </v-card>
+   <v-card align-center v-else>
+
+     <v-card-title>
+       Список университетов
+       <v-spacer/>
+       <v-text-field
+         append-icon="search"
+         label="Поиск университета"
+         single-line
+         hide-details
+         v-model="search"
+       />
+     </v-card-title>
+     <v-data-table v-if="selectedUnivers === null"
+                   :headers="headers"
+                   :items=universities
+                   :search="search"
+     >
+       <template slot="items" slot-scope="props" >
+         <router-link  tag="tr" v-bind:to="'university/'+props.item.id">
+           <td>{{ props.item.name }}</td>
+           <td class="text-xs-right">{{ props.item.average_ege }}</td>
+           <td class="text-xs-right">{{ props.item.placeEducation }}</td>
+           <td class="text-xs-right">{{ props.item.priceEducation}}</td>
+           <td class="text-xs-right">{{ props.item.link }}</td>
+         </router-link>
+       </template>
+       <v-alert slot="no-results" :value="true" color="error" icon="warning">
+         По вашему запросу "{{ search }}" нет результатов
+       </v-alert>
+     </v-data-table>
+   </v-card>
       </v-flex>
 
 </template>
@@ -84,7 +115,8 @@ export default {
   computed: mapGetters({
     // Todo make comparion with two - three universities on page
     // todo make
-    universities: 'all_univers'
+    universities: 'all_univers',
+    selectedUnivers: 'selectedUniversities'
   })
 }
 </script>

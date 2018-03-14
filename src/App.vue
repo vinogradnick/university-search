@@ -47,7 +47,7 @@
         class="hidden-sm-and-down"
       />
       <v-spacer/>
-      <v-btn icon>
+      <v-btn icon v-on:click="loadDatabase">
         <v-icon>apps</v-icon>
       </v-btn>
       <v-btn icon>
@@ -142,7 +142,7 @@
               <v-list-tile avatar>
                 <v-checkbox v-model="subject.selected" hide-details class="shrink mr-2"/>
                 <v-text-field v-bind:label=subject.name v-model.number=subject.value :disabled="!subject.selected"
-                              type="number" max="100" min="0" />
+                              type="number" max="100" min="0" :rules="rule_value" />
               </v-list-tile>
             </div>
           </v-list>
@@ -181,9 +181,7 @@ export default {
       ],
       valid: true,
       rule_value: [
-        v => {
-          return Number(v) <= 100 || 'must be number'
-        }
+        v => Number(v) <= 100 || 'вы привысили лимит баллов'
       ]
     }
   },
@@ -193,7 +191,8 @@ export default {
     // TODO save data_form => university_USER STATE
     // TOdo make filtration universtiy by ege values,
     // Todo make reset order university list
-      selected: 'selected_subj'
+      selected: 'selected_subj',
+      loadDatabase: 'loadFirebase'
 
     })
 

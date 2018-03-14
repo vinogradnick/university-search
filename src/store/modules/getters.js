@@ -36,5 +36,7 @@ export const getters = {
   getFilteredUniversities: (state) => {
     const subjects = state.selected_subjects
     const univer_subj = state.universitylist.ed
-  }
+  },
+  // Если условие не выполняется отменить запрос и вернуть пустой список
+  selectedUniversities: (state) => state.selected_univers.length === 0 ? null : state.selected_univers
 }

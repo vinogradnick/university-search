@@ -1,3 +1,4 @@
+
 export const actions = {
   searching ({state, commit}) {
     console.log('change')
@@ -12,6 +13,7 @@ export const actions = {
     commit('loadDatabase')
   },
   professionlistOrder: ({state, commit}) => {
+    // Todo make professionlist ordering
     console.log('profession list order')
     commit('orderProfession')
   }

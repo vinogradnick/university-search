@@ -1,4 +1,5 @@
 import {Database} from '../../api/databaseWorker'
+import {localStorager} from '../../api/localstorageWorker'
 
 export const mutations = {
   // TOdo  make fill database from firebase
@@ -24,8 +25,12 @@ export const mutations = {
   // Получить список выбранных университетов
   selectUniversities: function (state, rootState) {
     // todo сделать выборку университетов для поиска
-    console.log(state.universitylist[0].educationPrograms)
-    alert(state.universitylist.filter(univer => univer.educationPrograms.subjects === state.selected_subjects))
+    console.log(state.ege_value)
+    let universities = state.universitylist.filter(univer => {
+      return Number(univer.average_ege) <= Number(state.ege_value)
+    })
+    console.log(universities)
+    state.selected_univers = universities
   },
 
   // Выбор образовательных программ согласно баллам
@@ -37,6 +42,11 @@ export const mutations = {
   // todo orderUniversitiesbyLocation: (state) => { return state.universitylist.filter(univer => univer.location === user_location) },
   // Загрузка базы данных в состояние
   loadDatabase: (state) => {
-    console.log(Database)
+    // todo xm.... i need to more time for this
+    let universities = Database.ref('universitylist/0').once('value')
+    console.log(universities)
+  },
+  loadLocalStorage: (state) => {
+
   }
 }
