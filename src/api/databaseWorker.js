@@ -18,4 +18,5 @@ const firebaseDatabase = Firebase.initializeApp({
   storageBucket: 'university-77bec.appspot.com',
   messagingSenderId: '713552458128'
 })
+// todo make references to universityList search
 export const Database = firebaseDatabase.database()

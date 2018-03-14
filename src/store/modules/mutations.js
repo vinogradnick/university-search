@@ -1,6 +1,7 @@
 import {Database} from '../../api/databaseWorker'
 
 export const mutations = {
+  // TOdo  make fill database from firebase
   setData: (state, {type, data}) => {
     console.log(data)
     state[type] = data

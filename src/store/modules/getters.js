@@ -1,4 +1,5 @@
 export const getters = {
+
   all_univers: (state) => {
     return state.universitylist
   },
