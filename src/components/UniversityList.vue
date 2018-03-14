@@ -22,9 +22,9 @@
       <template slot="items" slot-scope="props" >
         <router-link  tag="tr" v-bind:to="'university/'+props.item.id">
         <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.egeval }}</td>
-        <td class="text-xs-right">{{ props.item.places }}</td>
-        <td class="text-xs-right">{{ props.item.price}}</td>
+        <td class="text-xs-right">{{ props.item.average_ege }}</td>
+        <td class="text-xs-right">{{ props.item.placeEducation }}</td>
+        <td class="text-xs-right">{{ props.item.priceEducation}}</td>
         <td class="text-xs-right">{{ props.item.link }}</td>
         </router-link>
       </template>
@@ -51,14 +51,10 @@ export default {
           sortable: true,
           value: 'name'
         },
-
-        { text: 'Проходной бал', value: 'egeval' },
-        { text: 'Количество мест', value: 'places' },
-        { text: 'Стоимость обучения', value: 'price' },
+        { text: 'Проходной бал', value: 'average_ege' },
+        { text: 'Количество мест', value: 'placeEducation' },
+        { text: 'Стоимость обучения', value: 'priceEducation' },
         { text: 'Ссылка на сайт', value: 'link' }
-      ],
-      items: [
-
       ]
     }
   },

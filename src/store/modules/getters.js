@@ -17,7 +17,13 @@ export const getters = {
   get_mathematics: (state) => {
     return state.subjects[6]
   },
-
+  getProfessionList: (state) => {
+    return state.professions
+  },
+  getEducationPrograms: (state, id) => {
+    // todo подумать над получением програм обучения хм...
+    return state.universitylist[id].educationPrograms
+  },
   get_russian: (state) => {
     return state.subjects[8]
   },
@@ -25,5 +31,9 @@ export const getters = {
     const list = state.universitylist.educationPrograms.filter(subj => subj.subject === state.selected_subjects)
     console.log(list)
     return list
+  },
+  getFilteredUniversities: (state) => {
+    const subjects = state.selected_subjects
+    const univer_subj = state.universitylist.ed
   }
 }

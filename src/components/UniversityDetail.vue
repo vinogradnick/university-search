@@ -3,47 +3,65 @@
     <v-container fill-height>
       <v-layout align-center>
         <v-flex xs12>
-          <h3 class="display-3 text-xs-center" >
+          <h4 class="display-2 text-xs-center" >
             {{university.name}}
-          </h3>
+          </h4>
+          <br>
           <br>
           <span class="subheading">Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.</span>
           <v-divider class="my-3"/>
-          <div class="title mb-3"  >
-            <v-layout row wrap >
-              <v-flex xs4 align-center>
-                <p class="headline">Стоимость обучения: 400 000 р</p>
-              </v-flex>
-              <v-flex xs4 align-center>
-                <p class="headline">Образовательных программ: 150</p>
-              </v-flex>
-              <v-flex xs4 align-center>
-                <p class="headline">Проходной бал: 290</p>
-              </v-flex>
-            </v-layout>
-          </div>
           <v-divider class="my-3"/>
           <h3 class="text-xs-center display-1">Образовательные программы</h3>
-          <v-list two-line>
-            <template v-for="program in university.educationPrograms">
-              <v-list-tile
-                avatar
-                ripple
-                @click="toggle(program)"
-                :key="program.id"
+          <br>
+          <br>
+          <v-card flat color="grey lighten-3">
+            <v-container fluid grid-list-md>
+              <v-data-iterator
+                content-tag="v-layout"
+                row
+                wrap
+                :items="university.educationPrograms"
+                :rows-per-page-items="rowsPerPageItems"
+                :pagination.sync="pagination"
               >
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ program.name }}</v-list-tile-title>
-                  <v-list-tile-sub-title class="text--primary">{{ program.about}}</v-list-tile-sub-title>
-                  <v-list-tile-sub-title>{{ program.priceEducation }}</v-list-tile-sub-title>
-                </v-list-tile-content>
-                <v-list-tile-action>
-                  <v-list-tile-action-text>Код программы: {{ program.edu_code }}</v-list-tile-action-text>
-
-                </v-list-tile-action>
-              </v-list-tile>
-            </template>
-          </v-list>
+                <v-flex
+                  slot="item"
+                  slot-scope="props"
+                  xs12
+                  sm6
+                  md4
+                  lg3
+                >
+                  <v-card>
+                    <v-card-title><h4>{{ props.item.name }}</h4></v-card-title>
+                    <v-divider/>
+                    <v-list dense>
+                      <v-list-tile>
+                        <v-list-tile-content>Описание</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.about }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Количество программ обучения:</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.countPrograms }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Количество университетов</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.countUniversities }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Стоимость обучения</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.priceEducation}}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Рейтинг</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.rate}}</v-list-tile-content>
+                      </v-list-tile>
+                    </v-list>
+                  </v-card>
+                </v-flex>
+              </v-data-iterator>
+            </v-container>
+          </v-card>
         </v-flex>
 
       </v-layout>
@@ -59,15 +77,16 @@ export default {
 
   computed: {
     ...mapGetters({
-      educationPrograms: 'get_programs'
+
+      programsEducation: 'getEducationPrograms',
+      professionList: 'getProfessionList'
 
     }),
     university: function () {
       // succses university_detail view for this unviersirty
       const routeParams = this.$route.params.id
       return this.$store.getters.currentUniversity(Number(routeParams))
-    }
-
+    },
   },
   data: function () {
     return {

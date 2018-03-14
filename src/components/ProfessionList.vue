@@ -2,82 +2,83 @@
   <v-flex xs12>
     <v-tabs right>
       <v-tab>
-        <v-icon>list</v-icon>
+        Список&nbsp;&nbsp;<v-icon>list</v-icon>
       </v-tab>
       <v-tab>
-        <v-icon>grid_on</v-icon>
+      Карточки&nbsp;&nbsp;<v-icon>grid_on</v-icon>
       </v-tab>
       <br>
       <v-tab-item :key="1">
-        <v-list three-line>
-         <!-- Список профессий шаблон-->
-
-          <template v-for="(item, index) in items">
-            <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
-            <v-divider v-else-if="item.divider" :inset="item.inset" :key="index" />
-            <v-list-tile avatar v-else :key="item.title">
-              <v-list-tile-avatar> <img :src="item.avatar"> </v-list-tile-avatar>
+        <v-list two-line>
+          <template v-for="profession in professionList">
+            <v-list-tile
+              avatar
+              ripple
+              @click="toggle(profession)"
+              :key="profession.id"
+            >
               <v-list-tile-content>
-                <v-list-tile-title v-html="item.title" />
-                <v-list-tile-sub-title v-html="item.subtitle" /> </v-list-tile-content>
+                <v-list-tile-title>{{ profession.name }}</v-list-tile-title>
+                <v-list-tile-sub-title class="text--primary">{{ profession.about }}</v-list-tile-sub-title>
+                <v-list-tile-sub-title>Стоимость обучения: {{ profession.priceEducation }}</v-list-tile-sub-title>
+              </v-list-tile-content>
+              <v-list-tile-action>
+                <router-link tag="a" v-bind:to="'profession/'+profession.id">
+                <v-list-tile-action-text>{{profession.rate}}</v-list-tile-action-text>
+                </router-link>
+              </v-list-tile-action>
             </v-list-tile>
+            <v-divider v-if="profession.id + 1 < professionList.length" :key="profession.id"/>
           </template>
-          <!--     ____          -->
         </v-list>
       </v-tab-item>
       <v-tab-item :key="2">
         <v-card flat>
-          <v-container grid-list-md>
-            <v-layout row wrap>
-              <v-flex xs4>
-                <v-card>
-                  <v-card-media src="/static/doc-images/cards/desert.jpg" height="200px"> </v-card-media>
-                  <v-card-title primary-title>
-                    <div>
-                      <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                      <div>Located two hours south of Sydney in the
-                        <br>Southern Highlands of New South Wales, ...</div>
-                    </div>
-                  </v-card-title>
-                  <v-card-actions>
-                    <v-btn flat color="orange">Share</v-btn>
-                    <v-btn flat color="orange">Explore</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-              <v-flex xs4>
-                <v-card>
-                  <v-card-media src="/static/doc-images/cards/desert.jpg" height="200px"> </v-card-media>
-                  <v-card-title primary-title>
-                    <div>
-                      <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                      <div>Located two hours south of Sydney in the
-                        <br>Southern Highlands of New South Wales, ...</div>
-                    </div>
-                  </v-card-title>
-                  <v-card-actions>
-                    <v-btn flat color="orange">Share</v-btn>
-                    <v-btn flat color="orange">Explore</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-              <v-flex xs4>
-                <v-card>
-                  <v-card-media src="/static/doc-images/cards/desert.jpg" height="200px"> </v-card-media>
-                  <v-card-title primary-title>
-                    <div>
-                      <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                      <div>Located two hours south of Sydney in the
-                        <br>Southern Highlands of New South Wales, ...</div>
-                    </div>
-                  </v-card-title>
-                  <v-card-actions>
-                    <v-btn flat color="orange">Share</v-btn>
-                    <v-btn flat color="orange">Explore</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-            </v-layout>
+          <v-container fluid grid-list-md>
+              <v-data-iterator
+                content-tag="v-layout"
+                row
+                wrap
+                :items="professionList"
+                :rows-per-page-items="rowsPerPageItems"
+                :pagination.sync="pagination"
+              >
+                <v-flex
+                  slot="item"
+                  slot-scope="props"
+                  xs12
+                  sm6
+                  md4
+                  lg3
+                >
+                  <v-card>
+                    <v-card-title><h4>{{ props.item.name }}</h4></v-card-title>
+                    <v-divider/>
+                    <v-list dense>
+                      <v-list-tile>
+                        <v-list-tile-content>Описание</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.about }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Количество программ обучения:</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.countPrograms }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Количество университетов</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.countUniversities }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Стоимость обучения</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.priceEducation}}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Рейтинг</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ props.item.rate}}</v-list-tile-content>
+                      </v-list-tile>
+                    </v-list>
+                  </v-card>
+                </v-flex>
+              </v-data-iterator>
           </v-container>
         </v-card>
       </v-tab-item>
@@ -95,44 +96,8 @@ export default {
     professionList: 'getProfessionList'
   })
   },
-  data () {
-    return {
-      items: [{
-        header: 'Список профессий'
-      }, {
-        avatar: '/static/doc-images/lists/1.jpg',
-        title: 'Архитектор',
-        subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-      }, {
-        divider: true,
-        inset: true
-      }, {
-        avatar: '/static/doc-images/lists/2.jpg',
-        title: 'Юрист <span class="grey--text text--lighten-1">4</span>',
-        subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
-      }, {
-        divider: true,
-        inset: true
-      }, {
-        avatar: '/static/doc-images/lists/3.jpg',
-        title: 'Экономист',
-        subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
-      }, {
-        divider: true,
-        inset: true
-      }, {
-        avatar: '/static/doc-images/lists/4.jpg',
-        title: 'Birthday gift',
-        subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?"
-      }, {
-        divider: true,
-        inset: true
-      }, {
-        avatar: '/static/doc-images/lists/5.jpg',
-        title: 'Recipe to try',
-        subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
-      }]
-    }
+  data: function () {
+    return {}
   },
   methods: {...mapActions({
     orderList: 'professionlistOrder'

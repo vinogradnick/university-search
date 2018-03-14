@@ -128,21 +128,39 @@ export const state = {
       placeEducation: 25,
       average_ege: '75.5',
       website_link: 'link',
+      location: '',
+      subjects: [],
 
       educationPrograms: [
         {
           name: 'education program name',
           about: 'about education programs',
           priceEducation: 10000,
-          edu_code: '0.0.0'
+          edu_code: '0.0.0',
+          professions: [],
+          universities: [],
+          countUniversities: 0,
+          countProfessions: 0
 
         }
-
       ]
 
     }
   ],
-  professions: [],
+  professions: [
+    {
+      id:1,
+      name: 'professionName',
+      about: 'about',
+      educationPrograms: [],
+      countPrograms: 0,
+      countUniversities: 0,
+      perspective: 0,
+      subjests: [],
+      priceEducation: 0,
+      rate: 20
+    }
+  ],
   selected_univers: [],
   selected_subjects: [],
   ege_value: 0,
@@ -152,7 +170,6 @@ export const state = {
       value: 0,
       required: false,
       selected: false
-
     },
     {
       name: 'География',
