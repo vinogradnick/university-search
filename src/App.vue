@@ -87,7 +87,7 @@
           <v-toolbar-title>Баллы</v-toolbar-title>
           <v-spacer/>
           <v-toolbar-items>
-            <v-btn dark flat v-on:click="selected">Сохранить данные</v-btn>
+            <v-btn dark flat v-on:click="selected" @click.native="dialog=false" >Сохранить данные</v-btn>
           </v-toolbar-items>
           <v-menu bottom right offset-y>
             <v-btn slot="activator" dark icon>
@@ -195,7 +195,6 @@ export default {
       loadDatabase: 'loadFirebase'
 
     })
-
   }
 }
 </script>
