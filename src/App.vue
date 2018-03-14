@@ -79,6 +79,7 @@
       :overlay="false"
       scrollable
     >
+      <v-form v-model="valid" ref="form" lazy-validation>
       <v-card tile>
         <v-toolbar card dark color="primary">
           <v-btn icon @click.native="dialog = false" dark>
@@ -87,7 +88,7 @@
           <v-toolbar-title>Баллы</v-toolbar-title>
           <v-spacer/>
           <v-toolbar-items>
-            <v-btn dark flat v-on:click="selected" @click.native="dialog=false" >Сохранить данные</v-btn>
+            <v-btn dark flat v-on:click="selected" @click.native="dialog=false" type="submit" >Сохранить данные</v-btn>
           </v-toolbar-items>
           <v-menu bottom right offset-y>
             <v-btn slot="activator" dark icon>
@@ -103,7 +104,6 @@
         <v-card-text>
 
           <v-list three-line subheader>
-            <v-form v-model="valid" ref="form" lazy-validation>
               <v-subheader>Основные предметы</v-subheader>
               <v-container grid-list-md >
                 <v-layout row wrap>
@@ -116,6 +116,7 @@
                       min="0"
                       required
                       type="number"
+                      v-bind:onchange="validate"
                     />
                   </v-flex>
                   <v-flex xs6>
@@ -132,7 +133,6 @@
                 </v-layout>
               </v-container>
 
-            </v-form>
           </v-list>
 
           <v-divider/>
@@ -149,6 +149,7 @@
         </v-card-text>
         <div style="flex: 1 1 auto;"></div>
       </v-card>
+      </v-form>
     </v-dialog>
 
   </v-app>
@@ -186,7 +187,6 @@ export default {
     }
   },
   methods: {
-
     ...mapActions({
     // TODO save data_form => university_USER STATE
     // TOdo make filtration universtiy by ege values,
@@ -194,7 +194,7 @@ export default {
       selected: 'selected_subj',
       loadDatabase: 'loadFirebase'
 
-    })
+    }),
   }
 }
 </script>
