@@ -156,15 +156,19 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+import store from '@/store/index'
 export default {
   name: 'App',
-  computed: mapGetters({
-    subjects: 'get_subjects',
-    mathematics: 'get_mathematics',
-    russian: 'get_russian',
-    states: 'GET_STATES',
-    univers: 'GET_UNIVERSTIY_BY_EGE_VALUE'
-  }),
+  created: function () { store.dispatch('university/loadLocalStorage') },
+  computed: {
+
+    ...mapGetters({
+      subjects: 'user/get_subjects',
+      mathematics: 'user/get_mathematics',
+      russian: 'user/get_russian',
+      states: 'university/GET_STATES',
+      univers: 'university/GET_UNIVERSTIY_BY_EGE_VALUE'
+    })},
   data: () => {
     return {
       dialog: false,
@@ -190,8 +194,8 @@ export default {
       // TODO save data_form => university_USER STATE
       // TOdo make filtration universtiy by ege values,
       // Todo make reset order university list
-      selected: 'selected_subj',
-      loadDatabase: 'loadFirebase'
+      selected: 'user/selected_subj',
+      loadDatabase: 'university/loadFirebase'
     })
   }
 }

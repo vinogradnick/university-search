@@ -118,8 +118,8 @@ export default {
   computed: mapGetters({
     // Todo make comparion with two - three universities on page
     // todo make
-    universities: 'all_univers',
-    selectedUnivers: 'selectedUniversities'
+    universities: 'university/all_univers',
+    selectedUnivers: 'user/selectedUniversities'
   })
 }
 </script>

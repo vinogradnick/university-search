@@ -1,6 +1,5 @@
-export const state = {
-  universitylist: [
-
+export default {
+  _univers: [
     {
       id: 2,
       name: 'Московский Государственный университет имени М.В. Ломоносова',
@@ -121,99 +120,5 @@ export const state = {
       ]
 
     }
-  ],
-  professions: [
-    {
-      id: 1,
-      name: 'professionName',
-      about: 'about',
-      educationPrograms: [],
-      countPrograms: 0,
-      countUniversities: 0,
-      perspective: 0,
-      subjests: [],
-      priceEducation: 0,
-      rate: 20
-    }
-  ],
-  selected_univers: [],
-  selected_subjects: [],
-  ege_value: 0,
-  subjects: [
-    {
-      name: 'Биология',
-      value: 0,
-      required: false,
-      selected: false
-    },
-    {
-      name: 'География',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'Иностранный язык',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'Информатика',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'История',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'Литература',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'Математика',
-      value: 0,
-      required: false,
-      selected: true
-
-    },
-    {
-      name: 'Обществознание',
-      value: 0,
-      required: false,
-      selected: false
-
-    },
-    {
-      name: 'Русский язык',
-      value: 0,
-      required: false,
-      selected: true
-    },
-    {
-      name: 'Физика',
-      value: 0,
-      required: false,
-      selected: false
-    },
-    {
-      name: 'Химия',
-      value: 0,
-      required: false,
-      selected: false
-    }
-  ],
-  user_location: 'all'
-
+  ]
 }
