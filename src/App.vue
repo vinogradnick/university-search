@@ -80,7 +80,7 @@
       scrollable
     >
       <v-card tile>
-        <v-toolbar card dark color="primary">
+        <v-toolbar card dark color="primary" class="elevation-15">
           <v-btn icon @click.native="dialog = false" dark>
             <v-icon>close</v-icon>
           </v-btn>
@@ -175,7 +175,9 @@ export default {
         {icon: 'home', text: 'Главная', route: '/'},
         {icon: 'school', text: 'Университеты', route: '/unviversitylist'},
         {icon: 'content_cut', text: 'Професси', route: '/professionlist'},
-        {icon: 'local_offer', text: 'Программы обучения', route: '/studyprogramlist'}
+        {icon: 'local_offer', text: 'Программы обучения', route: '/studyprogramlist'},
+        {icon: 'info', text: 'О программе', route: '/aboutprogram'}
+
       ],
       valid: true,
       rule_value: [

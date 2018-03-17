@@ -4,6 +4,7 @@ import UniversityList from '@/components/UniversityList'
 import ProfessionList from '@/components/ProfessionList'
 import StudyprogramList from '@/components/StudyprogramList'
 import UniversityDetail from '@/components/UniversityDetail'
+import AboutProgram from '@/components/AboutProgram'
 import Main from '@/components/Main'
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/university/:id',
       name: 'UniversityDetail',
       component: UniversityDetail
+    },
+    {
+      path: '/aboutprogram',
+      name: 'AboutProgram',
+      component: AboutProgram
     }
 
   ]

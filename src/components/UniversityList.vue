@@ -1,6 +1,6 @@
 <template>
- <v-flex xs12>
-        <v-card align-center v-if="selectedUnivers !== null">
+ <v-flex xs12 >
+        <v-card align-center v-if="selectedUnivers !== null" class="elevation-20" >
 
     <v-card-title>
         Список найденых университетов
@@ -17,6 +17,7 @@
                     :headers="headers"
                     :items=selectedUnivers
                     :search="search"
+                    rows-per-page-text="Количество на странице"
       >
       <template slot="items" slot-scope="props" >
         <router-link  tag="tr" v-bind:to="'university/'+props.item.id">
@@ -49,6 +50,8 @@
                    :headers="headers"
                    :items=universities
                    :search="search"
+                   rows-per-page-text="Количество на странице"
+
      >
        <template slot="items" slot-scope="props" >
          <router-link  tag="tr" v-bind:to="'university/'+props.item.id">

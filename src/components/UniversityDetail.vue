@@ -8,7 +8,7 @@
           </h4>
           <br>
           <br>
-          <span class="subheading">Lorem ipsum dolor sit amet, pri veniam forensibus id. Vis maluisset molestiae id, ad semper lobortis cum. At impetus detraxit incorrupte usu, repudiare assueverit ex eum, ne nam essent vocent admodum.</span>
+          <span class="subheading">Описание университета</span>
           <v-divider class="my-3"/>
           <v-divider class="my-3"/>
           <h3 class="text-xs-center display-1">Образовательные программы</h3>

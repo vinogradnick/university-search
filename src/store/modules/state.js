@@ -1,27 +1,9 @@
 export const state = {
   universitylist: [
-    {
-      id: 1,
-      name: 'Higher school of Economics',
-      about: 'about university',
-      priceEducation: '100 000',
-      average_priceEducation: '1000',
-      placeEducation: 25,
-      average_ege: 90,
-      website_link: 'link',
 
-      educationPrograms: [
-        {
-          name: 'education program name',
-          about: 'about education programs',
-          priceEducation: 10000,
-          edu_code: '0.0.0'
-        }
-      ]
-    },
     {
       id: 2,
-      name: 'Московский гос универ',
+      name: 'Московский Государственный университет имени М.В. Ломоносова',
       about: 'about university',
       priceEducation: '100 000',
       average_priceEducation: '1000',
