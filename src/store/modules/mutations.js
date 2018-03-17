@@ -20,7 +20,7 @@ export const mutations = {
     state.ege_value = ege
   },
   refreshSubjects: function (state) {
-    for (let i = 0; i < state.subjects.length; i++) state.subjects[i].value = 0
+    for (let i = 0; i < state.subjects.length; i++) { state.subjects[i].value = 0 }
   },
   // Получить список выбранных университетов
   selectUniversities: function (state, rootState) {
@@ -39,14 +39,12 @@ export const mutations = {
   },
   */
   // Сортировка программ обучения по городу
-  // todo orderUniversitiesbyLocation: (state) => { return state.universitylist.filter(univer => univer.location === user_location) },
+  // TODO   orderUniversitiesbyLocation: (state) => { return state.universitylist.filter(univer => univer.location === user_location) },
   // Загрузка базы данных в состояние
   loadDatabase: (state) => {
     // todo xm.... i need to more time for this
     let universities = Database.ref('universitylist/0').once('value')
     console.log(universities)
   },
-  loadLocalStorage: (state) => {
-
-  }
+  loadLocalStorage: (state) => {}
 }

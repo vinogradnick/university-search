@@ -1,5 +1,4 @@
 export const state = {
-
   universitylist: [
     {
       id: 1,
@@ -17,11 +16,8 @@ export const state = {
           about: 'about education programs',
           priceEducation: 10000,
           edu_code: '0.0.0'
-
         }
-
       ]
-
     },
     {
       id: 2,
@@ -39,11 +35,8 @@ export const state = {
           about: 'about education programs',
           priceEducation: 10000,
           edu_code: '0.0.0'
-
         }
-
       ]
-
     },
     {
       id: 3,
@@ -149,7 +142,7 @@ export const state = {
   ],
   professions: [
     {
-      id:1,
+      id: 1,
       name: 'professionName',
       about: 'about',
       educationPrograms: [],
