@@ -120,5 +120,33 @@ export default {
       ]
 
     }
+  ],
+  _professions: [
+    {
+      id: 1,
+      name: 'professionName',
+      about: 'about',
+      educationPrograms: [],
+      countPrograms: 0,
+      countUniversities: 0,
+      perspective: 0,
+      subjests: [],
+      priceEducation: 0,
+      rate: 20
+    }
+  ],
+  _educationprograms: [
+    {
+      name: 'education program name',
+      about: 'about education programs',
+      priceEducation: 10000,
+      edu_code: '0.0.0'
+    },
+    {
+      name: 'education program name',
+      about: 'about education programs',
+      priceEducation: 10000,
+      edu_code: '0.0.0'
+    }
   ]
 }

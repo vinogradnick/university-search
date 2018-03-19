@@ -1,37 +1,31 @@
 /* eslint-disable no-trailing-spaces */
+import Secret from '@/api/SecretStorage'
 export default{
   state: {
     professions: [
-      {
-        id: 1,
-        name: 'professionName',
-        about: 'about',
-        educationPrograms: [],
-        countPrograms: 0,
-        countUniversities: 0,
-        perspective: 0,
-        subjests: [],
-        priceEducation: 0,
-        rate: 20
-      }
+
     ]
   },
   namespaced: true,
 
   mutations: {
+    loadList: function (state) {
+      state.professions = Secret._professions
+    }
 
   },
 
   actions: {
+    LoadProfession: ({state, commit}) => {
+      commit('loadList')
+    }
 
   },
 
   getters: {
-
-
     getProfessionList: (state) => {
       return state.professions
-    },
+    }
   }
 
 }

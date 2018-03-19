@@ -1,5 +1,4 @@
 /* eslint-disable no-trailing-spaces */
-import {Database} from '../../../api/databaseWorker'
 import Secret from '../../../api/SecretStorage'
 export default{
   namespaced: true,
@@ -17,12 +16,10 @@ export default{
     },
     loadDatabase: (state) => {
       // todo xm.... i need to more time for this
-      let universities = Database.ref('universitylist/0').once('value')
-      console.log(universities)
     },
     loadLocal: (state) => {
       state.universitylist = Secret._univers
-    },
+    }
   },
 
   actions: {
@@ -40,28 +37,29 @@ export default{
       commit('orderProfession')
     },
     loadLocalStorage: ({state, commit}) => {
-      console.log("hui");
+      console.log('hui')
+
       commit('loadLocal')
-    }
+    },
 
   },
 
   getters: {
-    GET_UNIVERSTIY_BY_EGE_VALUE: function (state) {
-      const list = state.universitylist.educationPrograms.filter(subj => subj.subject === state.selected_subjects)
-      console.log(list)
-      return list
-    },
+    // GET_UNIVERSTIY_BY_EGE_VALUE: function (state) {
+    //   // const list = state.universitylist.educationPrograms.filter(subj => subj.subject === state.selected_subjects)
+    //   console.log(list)
+    //   return list
+    // },
     getFilteredUniversities: (state) => {
       const subjects = state.selected_subjects
-      const univer_subj = state.universitylist.ed
+      const univer_subj = state.universitylist
     },
     // Если условие не выполняется отменить запрос и вернуть пустой список
 
     all_univers: (state) => {
       return state.universitylist
     },
-    currentUniversity (state) {
+    currentUniversity: (state) => {
       return (id) => {
         return state.universitylist.find(univer => univer.id === id)
       }

@@ -41,6 +41,7 @@
         label="Найти университет"
         autocomplete
         flat
+        :onchange="lol"
         solo-inverted
         prepend-icon="search"
         item-text="name"
@@ -157,9 +158,14 @@
 <script>
 import {mapGetters, mapActions} from 'vuex'
 import store from '@/store/index'
+
 export default {
   name: 'App',
-  created: function () { store.dispatch('university/loadLocalStorage') },
+  created: function () {
+    store.dispatch('university/loadLocalStorage')
+    store.dispatch('profession/LoadProfession')
+  },
+
   computed: {
 
     ...mapGetters({
@@ -190,6 +196,9 @@ export default {
     }
   },
   methods: {
+    lol () {
+      console.log('us')
+    },
     ...mapActions({
       // TODO save data_form => university_USER STATE
       // TOdo make filtration universtiy by ege values,

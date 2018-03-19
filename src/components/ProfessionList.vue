@@ -40,8 +40,6 @@
                 row
                 wrap
                 :items="professionList"
-                :rows-per-page-items="rowsPerPageItems"
-                :pagination.sync="pagination"
               >
                 <v-flex
                   slot="item"
@@ -93,7 +91,7 @@ import {
 export default {
   name: 'ProfessionList',
   computed: {...mapGetters({
-    professionList: 'getProfessionList'
+    professionList: 'profession/getProfessionList'
   })
   },
   data: function () {

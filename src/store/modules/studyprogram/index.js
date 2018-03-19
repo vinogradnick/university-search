@@ -1,12 +1,17 @@
 /* eslint-disable no-trailing-spaces */
+import Secret from '@/api/SecretStorage'
 export default{
-  namespaced:true,
+  namespaced: true,
 
   state: {
+    educationPrograms: []
 
   },
 
   mutations: {
+    loadPrograms: (state) => {
+      state.educationPrograms
+    }
 
   },
 
