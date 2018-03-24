@@ -1,6 +1,6 @@
 <template>
   <v-flex xs12>
-    <v-tabs right>
+    <v-tabs right class="elevation-3">
       <v-tab>
         Список&nbsp;&nbsp;<v-icon>list</v-icon>
       </v-tab>

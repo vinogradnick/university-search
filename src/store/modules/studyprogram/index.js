@@ -1,6 +1,6 @@
 /* eslint-disable no-trailing-spaces */
 import Secret from '@/api/SecretStorage'
-export default{
+export default {
   namespaced: true,
 
   state: {
@@ -10,20 +10,20 @@ export default{
 
   mutations: {
     loadPrograms: (state) => {
-      state.educationPrograms
+      state.educationPrograms = Secret._educationprograms
     }
 
   },
 
-  actions: {
-
-  },
+  actions: {},
 
   getters: {
     getEducationPrograms: (state, id) => {
       // todo подумать над получением програм обучения хм...
       return state.universitylist[id].educationPrograms
+    },
+    all_programs: (state) => {
+      return Secret._educationprograms
     }
   }
-
 }

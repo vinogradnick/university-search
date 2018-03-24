@@ -51,7 +51,6 @@
                    :items=universities
                    :search="search"
                    rows-per-page-text="Количество на странице"
-
      >
        <template slot="items" slot-scope="props" >
          <router-link  tag="tr" v-bind:to="'university/'+props.item.id">
@@ -93,19 +92,6 @@ export default {
     }
   },
   methods: {
-    init: function () {
-      this.loadData()
-    },
-    loadData: function () {
-      this.$http.get('@/db.json').then((response) => {
-        if (response.body) {
-          console.log(response.body)
-          this.locat = response.body
-        }
-      }, (response) => {
-        this.error = response
-      })
-    },
     ...mapActions({
       // todo make router to university detail view
       // todo make sity order -> univesitylist
@@ -118,7 +104,7 @@ export default {
   computed: mapGetters({
     // Todo make comparion with two - three universities on page
     // todo make
-    universities: 'university/all_univers',
+    universities: 'university/ALL_UNIVERSITIES',
     selectedUnivers: 'user/selectedUniversities'
   })
 }

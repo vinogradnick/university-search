@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-xl text-xs-center v-if="university">
 
-    <v-parallax src="http://edusmi.ru/wp-content/uploads/2016/08/ea2d6711a4155e9522e708266955a81e.jpg" height="300">
+    <v-parallax src="https://i0.photo.2gis.com/images/branch/16/2251799829293480_cb73.jpg" height="300">
       <br><br><br><br>
 
     </v-parallax>
@@ -14,14 +14,32 @@
     </v-card>
     <br>
     <v-card>
-      <v-card-text class="px-0">{{university.about}}</v-card-text>
+      <v-card-text class="px-0">
+        <h4>{{university.about}}</h4>
+        <br>
+        <p>Контактная информация</p>
+      </v-card-text>
     </v-card>
     <br>
     <v-card>
-      <v-card-text class="px-0">{{university.about}}</v-card-text>
+      <v-container>
+        <v-layout row wrap>
+          <v-flex xs4>
+            <p>Стоимость обучения</p>
+          </v-flex>
+          <v-flex xs4>
+            <p>Количество мест</p>
+          </v-flex>
+          <v-flex xs4>
+            <p>Образовательные программы</p>
+          </v-flex>
+        </v-layout>
+      </v-container>
+
     </v-card>
     <br>
     <v-card>
+      <v-container>
       <v-tabs fixed-tabs>
         <v-tab>
          Профессии
@@ -31,15 +49,78 @@
         </v-tab>
         <v-tab-item>
           <v-card flat>
-            <v-card-text>1</v-card-text>
+            <br>
+            <v-data-iterator
+              content-tag="v-layout"
+              row
+              wrap
+              :items="university.professions"
+            >
+              <v-flex
+                slot="item"
+                slot-scope="props"
+                xs12
+                sm6
+                md4
+                lg3
+              >
+                <v-card>
+                  <v-card-title><h4>{{ props.item.name }}</h4></v-card-title>
+                  <v-divider/>
+                  <v-list dense >
+                    <v-list-tile>
+                      <v-list-tile-content>Описание</v-list-tile-content>
+                      <v-list-tile-content class="align-end">{{ props.item.about }}</v-list-tile-content>
+                    </v-list-tile>
+                    <v-list-tile>
+                      <v-list-tile-content>Количество программ обучения:</v-list-tile-content>
+                      <v-list-tile-content class="align-end">{{ props.item.countPrograms }}</v-list-tile-content>
+                    </v-list-tile>
+                    <v-list-tile>
+                      <v-list-tile-content>Количество университетов</v-list-tile-content>
+                      <v-list-tile-content class="align-end">{{ props.item.countUniversities }}</v-list-tile-content>
+                    </v-list-tile>
+                    <v-list-tile>
+                      <v-list-tile-content>Стоимость обучения</v-list-tile-content>
+                      <v-list-tile-content class="align-end">{{ props.item.priceEducation}}</v-list-tile-content>
+                    </v-list-tile>
+                    <v-list-tile>
+                      <v-list-tile-content>Рейтинг</v-list-tile-content>
+                      <v-list-tile-content class="align-end">{{ props.item.rate}}</v-list-tile-content>
+                    </v-list-tile>
+                  </v-list>
+                </v-card>
+              </v-flex>
+            </v-data-iterator>
           </v-card>
         </v-tab-item>
         <v-tab-item>
           <v-card flat>
-            <v-card-text>2</v-card-text>
+            <br>
+            <v-list three-line>
+              <template v-for="item in university.educationPrograms">
+                <v-list-tile
+                  avatar
+                  ripple
+                  @click="toggle(item)"
+                  :key="item.name"
+                >
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                    <v-list-tile-sub-title><span class="text--primary">{{ item.about }}</span></v-list-tile-sub-title>
+                    <v-list-tile-sub-title>Стоимость обучения:&nbsp;&nbsp;{{ item.priceEducation }} Бюджетные места:{{item.freeCountPlaces}} Коммерческие места:{{item.CountPlaces}} </v-list-tile-sub-title>
+                  </v-list-tile-content>
+                  <v-list-tile-action>
+                    <v-list-tile-action-text>{{ item.edu_code }}</v-list-tile-action-text>
+                  </v-list-tile-action>
+                </v-list-tile>
+                <v-divider v-if="index + 1 < items.length" :key="item"/>
+              </template>
+            </v-list>
           </v-card>
         </v-tab-item>
       </v-tabs>
+      </v-container>
     </v-card>
   </v-container>
 

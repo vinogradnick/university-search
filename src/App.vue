@@ -5,6 +5,7 @@
       :clipped="$vuetify.breakpoint.mdAndUp"
       app
       v-model="drawer"
+      class="elevation-4"
     >
       <v-list dense>
         <template v-for="item in items">
@@ -41,19 +42,59 @@
         label="Найти университет"
         autocomplete
         flat
-        :onchange="lol"
         solo-inverted
         prepend-icon="search"
         item-text="name"
         class="hidden-sm-and-down"
       />
       <v-spacer/>
-      <v-btn icon v-on:click="loadDatabase">
-        <v-icon>apps</v-icon>
-      </v-btn>
-      <v-btn icon>
-        <v-icon>notifications</v-icon>
-      </v-btn>
+
+      <v-menu
+        offset-y
+        :close-on-content-click="false"
+        :nudge-width="100"
+        v-model="LocationBar"
+      >
+
+        <v-badge left color="purple" overlap slot="activator">
+          <v-chip>Местоположение: {{user_location}}</v-chip>
+          <v-icon
+            large
+            color="white"
+          >
+            explore
+          </v-icon>
+        </v-badge>
+        <v-card>
+         <v-list>
+           <v-list-tile avatar>
+             <v-list-tile-content>
+               <v-list-tile-title>Пользователь</v-list-tile-title>
+               <v-list-tile-sub-title>Ваш текущий бал: {{ege_value}}</v-list-tile-sub-title>
+               <v-list-tile-sub-title>Ваше местоположение: {{user_location}}</v-list-tile-sub-title>
+
+             </v-list-tile-content>
+           </v-list-tile>
+         </v-list>
+          <v-divider/>
+          <v-list>
+            <v-list-tile>
+              <v-select
+                :items="locations"
+                v-model="user_location"
+                label="Город"
+                single-line
+              />
+            </v-list-tile>
+          </v-list>
+          <v-card-actions>
+            <v-spacer/>
+            <v-btn flat @click="menu = false">Закрыть</v-btn>
+            <v-btn color="primary" flat @click="LocationBar = false">Сохранить</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-menu>
+
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height grey lighten-3>
@@ -69,12 +110,12 @@
       color="red"
       dark
       fixed
-      @click.stop="dialog = !dialog"
+      @click.stop="welcome"
     >
       <v-icon>search</v-icon>
     </v-btn>
     <v-dialog
-      v-model="dialog"
+      v-model="welcome_dialog"
       fullscreen
       transition="dialog-bottom-transition"
       :overlay="false"
@@ -82,24 +123,14 @@
     >
       <v-card tile>
         <v-toolbar card dark color="primary" class="elevation-15">
-          <v-btn icon @click.native="dialog = false" dark>
+          <v-btn icon @click.native="StatusDialog = false" dark>
             <v-icon>close</v-icon>
           </v-btn>
           <v-toolbar-title>Баллы</v-toolbar-title>
           <v-spacer/>
           <v-toolbar-items>
-            <v-btn dark flat v-on:click="selected" @click.native="dialog=false" >Сохранить данные</v-btn>
+            <v-btn dark flat v-on:click="selected" @click.native="welcome" >Сохранить данные</v-btn>
           </v-toolbar-items>
-          <v-menu bottom right offset-y>
-            <v-btn slot="activator" dark icon>
-              <v-icon>more_vert</v-icon>
-            </v-btn>
-            <v-list>
-              <v-list-tile v-for="(item, i) in items" :key="i">
-                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
         </v-toolbar>
         <v-card-text>
 
@@ -139,8 +170,10 @@
           <v-divider/>
           <v-list three-line subheader>
             <v-subheader>Профильные предметы</v-subheader>
-            <div v-for="subject in subjects" v-bind:key=subject.name>
-              <v-list-tile avatar>
+            <div v-for="subject in subjects" v-bind:key=subject.name >
+              <div v-if="subject.name==='Математика'"></div>
+              <div v-else-if="subject.name==='Русский язык'"></div>
+              <v-list-tile avatar v-else>
                 <v-checkbox v-model="subject.selected" hide-details class="shrink mr-2"/>
                 <v-text-field v-bind:label=subject.name v-model.number=subject.value :disabled="!subject.selected"
                               type="number" max="100" min="0" :rules="rule_value" />
@@ -162,29 +195,34 @@ import store from '@/store/index'
 export default {
   name: 'App',
   created: function () {
-    store.dispatch('university/loadLocalStorage')
+    store.dispatch('university/loadUniversities')
     store.dispatch('profession/LoadProfession')
   },
-
   computed: {
-
     ...mapGetters({
-      subjects: 'user/get_subjects',
+      welcome_dialog: 'user/get_welcomeDialog',
+      subjects: 'user/subjectsList',
+      locations: 'university/GET_LOCATIONS',
       mathematics: 'user/get_mathematics',
       russian: 'user/get_russian',
       states: 'university/GET_STATES',
-      univers: 'university/GET_UNIVERSTIY_BY_EGE_VALUE'
+      ege_value: 'user/GET_EGE',
+      univers: 'university/GET_UNIVERSTIY_BY_EGE_VALUE',
+      user_location: 'user/get_location'
+
     })},
   data: () => {
     return {
       dialog: false,
       drawer: null,
       enabled: false,
+      LocationBar: false,
+      StatusDialog: false,
       a1: null,
       items: [
         {icon: 'home', text: 'Главная', route: '/'},
         {icon: 'school', text: 'Университеты', route: '/unviversitylist'},
-        {icon: 'content_cut', text: 'Професси', route: '/professionlist'},
+        {icon: 'content_cut', text: 'Профессии', route: '/professionlist'},
         {icon: 'local_offer', text: 'Программы обучения', route: '/studyprogramlist'},
         {icon: 'info', text: 'О программе', route: '/aboutprogram'}
 
@@ -196,13 +234,13 @@ export default {
     }
   },
   methods: {
-    lol () {
-      console.log('us')
-    },
+
     ...mapActions({
       // TODO save data_form => university_USER STATE
       // TOdo make filtration universtiy by ege values,
       // Todo make reset order university list
+      change: 'user/change_location',
+      welcome: 'user/show_Welcome',
       selected: 'user/selected_subj',
       loadDatabase: 'university/loadFirebase'
     })

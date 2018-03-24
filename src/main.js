@@ -5,8 +5,8 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import store from '@/store/index'
 import VueResource from 'vue-resource'
-import {db} from './api/databaseWorker'
 import VueFire from 'vuefire'
+
 
 Vue.use(Vuetify)
 Vue.use(VueResource)

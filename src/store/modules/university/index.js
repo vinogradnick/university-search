@@ -1,73 +1,55 @@
 /* eslint-disable no-trailing-spaces */
-import Secret from '../../../api/SecretStorage'
+import Secret from '@/api/SecretStorage'
+import axios from 'axios'
+
 export default{
   namespaced: true,
-
   state: {
-    universitylist: []
-
+    universitylist: [],
+    locations: []
   },
-
   mutations: {
-    // TOdo  make fill database from firebase
-    setData: (state, {type, data}) => {
-      console.log(data)
-      state[type] = data
+    LOAD_UNIVERSITIES_FROM_DB: (state, data) => {
+      state.locations = data.univers.map((univer) => univer.location)
+      state.universitylist = data.univers
     },
-    loadDatabase: (state) => {
-      // todo xm.... i need to more time for this
-    },
-    loadLocal: (state) => {
+    LOAD_UNIVERSITIES_FROM_SECRET: (state) => {
+      console.log('Загрузка из базы секрет')
       state.universitylist = Secret._univers
     }
   },
 
   actions: {
-    searching ({state, commit}) {
-      console.log('change')
-      commit('setData', {type: 'universitylist', data: null})
-    },
-    loadFirebase: ({state, commit}) => {
-      console.log('firebas is loading')
-      commit('loadDatabase')
-    },
-    professionlistOrder: ({state, commit}) => {
-      // Todo make professionlist ordering
-      console.log('profession list order')
-      commit('orderProfession')
-    },
-    loadLocalStorage: ({state, commit}) => {
-      console.log('hui')
 
-      commit('loadLocal')
-    },
+    loadUniversities: ({state, commit}) => {
+      axios.get('https://vinogradnick.github.io/db.json')
+        .then(response => {
+          commit('LOAD_UNIVERSITIES_FROM_DB', response.data)
+        })
+        .catch(error => {
+          commit('LOAD_UNIVERSITIES_FROM_SECRET')
+        })
+    }
 
   },
-
   getters: {
-    // GET_UNIVERSTIY_BY_EGE_VALUE: function (state) {
-    //   // const list = state.universitylist.educationPrograms.filter(subj => subj.subject === state.selected_subjects)
-    //   console.log(list)
-    //   return list
-    // },
     getFilteredUniversities: (state) => {
       const subjects = state.selected_subjects
       const univer_subj = state.universitylist
     },
-    // Если условие не выполняется отменить запрос и вернуть пустой список
-
-    all_univers: (state) => {
+    ALL_UNIVERSITIES: (state) => {
       return state.universitylist
     },
-    currentUniversity: (state) => {
+    CURRENT_UNIVERSITY: (state) => {
       return (id) => {
         return state.universitylist.find(univer => univer.id === id)
       }
     },
     GET_STATES: (state) => {
       return state.universitylist
+    },
+    GET_LOCATIONS: (state) => {
+      return state.locations
     }
-
   }
-
 }
